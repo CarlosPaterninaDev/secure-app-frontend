@@ -17,10 +17,7 @@
     <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
 
     <!-- add to homescreen for ios -->
-    <script
-      type="text/javascript"
-      src="https://unpkg.com/default-passive-events"
-    ></script>
+
 
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -28,8 +25,8 @@
       http-equiv="Content-Security-Policy"
       content="
   default-src 'self'; 
-  script-src 'self' https://apis.google.com https://cdn.jsdelivr.net;
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  script-src 'self' https://apis.google.com;
+  style-src 'self' https://fonts.googleapis.com;
   img-src 'self' data: https://res.cloudinary.com;
   font-src 'self' https://fonts.gstatic.com;
   connect-src 'self' https://secure-app-back-dab51e9ecda9.herokuapp.com;
