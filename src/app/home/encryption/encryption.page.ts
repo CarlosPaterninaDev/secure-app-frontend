@@ -134,6 +134,7 @@ export class EncryptionPage implements OnInit {
       reader.readAsText(this.file);
       this.file = undefined;
       this.fileName = '';
+      this.secret = '';
     }
   }
 
@@ -151,6 +152,7 @@ export class EncryptionPage implements OnInit {
       reader.readAsText(this.file);
       this.file = undefined;
       this.fileName = '';
+      this.secret = '';
     }
   }
 
