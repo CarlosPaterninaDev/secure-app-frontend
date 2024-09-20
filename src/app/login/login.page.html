@@ -1,0 +1,56 @@
+<ion-content
+  class="ion-justify-content-center ion-align-items-center ion-padding"
+>
+  <ion-grid fixed>
+    <h1 class="ion-padding">Log in</h1>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ion-item lines="none" class="ion-margin-top">
+        <ion-input
+          errorText="Invalid email"
+          labelPlacement="floating"
+          label="Username"
+          type="text"
+          formControlName="username"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin-top">
+        <ion-input
+          [errorText]="passwordErrors"
+          labelPlacement="floating"
+          label="Password"
+          type="password"
+          formControlName="password"
+        >
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+
+      <ion-button
+        class="ion-margin-top"
+        expand="block"
+        fill="solid"
+        color="primary"
+        type="submit"
+        routerLink="/home"
+        >Login</ion-button
+      >
+
+      <ion-item-divider mode="md">
+        <ion-label> Do you need an account? </ion-label>
+      </ion-item-divider>
+
+      <ion-button
+        (click)="onRegister()"
+        class="ion-margin-top"
+        expand="block"
+        fill="outline"
+        color="primary"
+        type="button"
+        routerLink="/home"
+        >Create a new account</ion-button
+      >
+    </form>
+  </ion-grid>
+</ion-content>

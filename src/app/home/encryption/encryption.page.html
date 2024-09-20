@@ -1,0 +1,77 @@
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-title class="fadein">Encryption</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding" fixed>
+    <ion-list >
+      <ion-list-header class="ion-margin-bottom">
+        <ion-label class="moving"> AES Tool</ion-label>
+      </ion-list-header>
+    </ion-list>
+
+    <form class="fadein" [formGroup]="form" (ngSubmit)="proccessFile()">
+      <div class="custom-file">
+        <input
+          type="file"
+          id="fileInput"
+          (change)="onFileSelected($event)"
+          hidden
+        />
+        <button type="button" (click)="triggerFileInput()">
+          Upload file
+        </button>
+        <span>{{ fileName || 'No file selected' }}</span>
+      </div>
+
+      <small style="color: red">{{ fileName ? '' : 'File required*' }}</small>
+
+      <ion-item lines="none" class="ion-margin-top">
+        <ion-input
+          errorText="Secret Key is required"
+          helperText="This key is used to encrypt or decrypt the file, don't lose it"
+          labelPlacement="floating"
+          label="Secret Key"
+          type="text"
+          formControlName="secret"
+        ></ion-input>
+      </ion-item>
+
+      <ion-list>
+        <ion-list-header>
+          <ion-label>Actions</ion-label>
+        </ion-list-header>
+      </ion-list>
+
+      <ion-item-divider mode="md">
+        <ion-label> What do you want to do?  Select an option...</ion-label>
+      </ion-item-divider>
+      <br>
+
+      <ion-segment (ionChange)="onChangeSegment($event)" [value]="segment()">
+        <ion-segment-button value="Encrypt">
+          <ion-label>Encrypt</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="Decrypt">
+          <ion-label>Decrypt</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <ion-button
+        class="ion-margin-top"
+        expand="block"
+        fill="solid"
+        color="primary"
+        type="submit"
+        routerLink="/home"
+      >
+        {{segment() + ' file'}}</ion-button
+      >
+    </form>
+  </ion-grid>
+</ion-content>

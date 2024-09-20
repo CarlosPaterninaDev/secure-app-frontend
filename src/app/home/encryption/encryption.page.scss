@@ -1,0 +1,27 @@
+.custom-file {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px dotted #007bff;
+    padding: 2rem;
+  }
+  
+  .custom-file button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .custom-file button:hover {
+    background-color: #0056b3;
+  }
+  
+  .custom-file span {
+    font-size: 14px;
+    color: #555;
+  }
+  

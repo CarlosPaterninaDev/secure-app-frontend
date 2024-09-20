@@ -1,5 +1,5 @@
 {
-  "name": "secure",
+  "name": "secure-frontend",
   "integrations": {
     "capacitor": {}
   },

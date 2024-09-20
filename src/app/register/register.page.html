@@ -1,0 +1,91 @@
+<ion-content
+  class="ion-justify-content-center ion-align-items-center ion-padding"
+>
+  <ion-grid fixed>
+    <h1 class="ion-padding">Create an account</h1>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ion-item lines="none" class="ion-margin-top">
+        <ion-input
+          errorText="Invalid username"
+          labelPlacement="floating"
+          label="Username"
+          type="text"
+          formControlName="username"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin-top">
+        <ion-input
+          errorText="Invalid name"
+          labelPlacement="floating"
+          label="First Name"
+          type="text"
+          formControlName="firstName"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin-top">
+        <ion-input
+          errorText="Invalid last last name"
+          labelPlacement="floating"
+          label="Last Name"
+          type="text"
+          formControlName="lastName"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin-top">
+        <ion-input
+          errorText="Invalid Email"
+          labelPlacement="floating"
+          label="E-mail"
+          type="text"
+          formControlName="email"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin-top">
+        <ion-input
+          [errorText]="passwordErrors"
+          labelPlacement="floating"
+          label="Password"
+          type="password"
+          formControlName="password"
+        >
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+
+
+      <ion-button
+        class="ion-margin-top"
+        expand="block"
+        fill="solid"
+        color="primary"
+        type="submit"
+        routerLink="/home"
+        >Create and login</ion-button
+      >
+
+      <ion-item-divider mode="md">
+        <ion-label> Do you already have an account? </ion-label>
+      </ion-item-divider>
+
+      <ion-button
+        (click)="onLogin()"
+        class="ion-margin-top"
+        expand="block"
+        fill="outline"
+        color="primary"
+        type="button"
+        routerLink="/home"
+        >Login</ion-button
+      >
+
+   
+
+
+    </form>
+  </ion-grid>
+</ion-content>
