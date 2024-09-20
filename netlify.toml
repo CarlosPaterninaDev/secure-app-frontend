@@ -1,9 +1,3 @@
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET, HEAD, OPTIONS, POST, PUT"
-    Access-Control-Allow-Headers = "Content-Type, Authorization"
 [build]
   publish = "www"
   command = "npm install && ng build"
