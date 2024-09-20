@@ -24,6 +24,7 @@ import {
   IonButton,
   IonItemDivider,
   AlertController,
+  IonBadge,
 } from '@ionic/angular/standalone';
 import * as CryptoJS from 'crypto-js';
 
@@ -33,6 +34,7 @@ import * as CryptoJS from 'crypto-js';
   styleUrls: ['./encryption.page.scss'],
   standalone: true,
   imports: [
+    IonBadge,
     IonItemDivider,
     IonButton,
     IonInput,
@@ -62,7 +64,11 @@ export class EncryptionPage implements OnInit {
   });
   file!: File | undefined;
 
-  constructor() {}
+  constructor() {
+    this.form.valueChanges.subscribe((value) => {
+      this.secret = value.secret;
+    });
+  }
 
   ngOnInit() {}
 
@@ -87,6 +93,7 @@ export class EncryptionPage implements OnInit {
     }
 
     this.file = event.target.files[0] as File;
+
     if (this.file) {
       this.fileName = this.file.name;
     }
@@ -114,45 +121,58 @@ export class EncryptionPage implements OnInit {
     }
 
     if (this.segment() === 'Encrypt') {
-      this.encryptFile(this.file);
+      this.encryptFile();
     } else {
-      this.decryptFile(this.file);
+      this.decryptFile();
     }
   }
 
-  encryptFile(event: any): void {
+  encryptFile(): void {
     if (this.file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         const fileContent = e.target.result;
+
         const encrypted = CryptoJS.AES.encrypt(
           fileContent,
           this.secret
         ).toString();
+
         this.downloadEncryptedFile(encrypted);
       };
       reader.readAsText(this.file);
-      this.file = undefined;
-      this.fileName = '';
-      this.secret = '';
     }
   }
 
-  decryptFile(event: any): void {
+  decryptFile(): void {
     if (this.file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const encryptedContent = e.target.result;
-        // Desencriptar el contenido del archivo con AES
-        const decrypted = CryptoJS.AES.decrypt(encryptedContent, this.secret);
-        const originalText = decrypted.toString(CryptoJS.enc.Utf8);
-        this.downloadDecryptedFile(originalText);
-      };
+      try {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          const encryptedContent = e.target.result;
+          // Desencriptar el contenido del archivo con AES
 
-      reader.readAsText(this.file);
-      this.file = undefined;
-      this.fileName = '';
-      this.secret = '';
+          const decrypted = CryptoJS.AES.decrypt(encryptedContent, this.secret);
+
+          try {
+            const originalText = decrypted.toString(CryptoJS.enc.Utf8);
+            this.downloadDecryptedFile(originalText);
+          } catch (error) {
+            const originalText = decrypted.toString();
+            this.downloadDecryptedFile(originalText);
+          }
+        };
+
+        reader.readAsText(this.file);
+      } catch (error) {
+        this.alertController
+          .create({
+            header: 'Error',
+            message: 'Invalid secret',
+            buttons: ['OK'],
+          })
+          .then((alert) => alert.present());
+      }
     }
   }
 
@@ -163,6 +183,7 @@ export class EncryptionPage implements OnInit {
     link.href = url;
     link.download = 'archivo-encriptado.txt';
     link.click();
+
     window.URL.revokeObjectURL(url);
   }
 
@@ -173,6 +194,7 @@ export class EncryptionPage implements OnInit {
     link.href = url;
     link.download = 'archivo-desencriptado.txt';
     link.click();
+
     window.URL.revokeObjectURL(url);
   }
 }
